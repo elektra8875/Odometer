@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Beer Advisor</string>
+    <string name="find_beer">Find Beer!</string>
+    <string name="brands"></string>
+    <string-array name="beer_colors">
+        <item>light</item>
+        <item>amber</item>
+        <item>brown</item>
+        <item>dark</item>
+    </string-array>
+    <string name="message">Message</string>
+    <string name="temp">Temp</string>
+    <string name="milk">Milk</string>
+    <string name="sugar">Sugar</string>
+    <string name="lemon">Lemon</string>
+    <string name="hot">Hot</string>
+    <string name="cold">Cold</string>
+</resources>
