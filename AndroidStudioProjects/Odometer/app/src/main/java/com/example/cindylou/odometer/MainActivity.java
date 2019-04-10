@@ -1,5 +1,6 @@
 package com.example.cindylou.odometer;
 
+
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -18,10 +19,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.Locale;
 
-public class MainActivity extends Activity  {
+public class MainActivity extends Activity {
     //main activity connects to ServiceConnection (used to create connection with service) via an intent
     //ServiceConnection connects to OdometerService via intent
 
@@ -29,23 +31,26 @@ public class MainActivity extends Activity  {
     private boolean bound = false;
     private final int PERMISSION_REQUEST_CODE = 698;
     private final int NOTIFICATION_ID = 423;
-    public int seconds = 0; //use seconds and running to record the number of seconds passed
-    public boolean running; //and check whether the stopwatch is running
+    public int distance;
+
+
 
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
             OdometerService.OdometerBinder odometerBinder =
                     (OdometerService.OdometerBinder) binder;
-            odometer = odometerBinder.getOdometer();
+            odometer = odometerBinder.getOdometer(); //odometer service
             bound = true;
-        }
+        // bind to, receiving an object through which it can communicate with the service.
+        }//send requests, receive responses and perform interprocess communication
 
         //the Binder connects the OdometerService back to the ServiceConnection and again back to MainActivity
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             bound = false;
         }
+        //this is called when connection with the service has been disconnected; componentName = classname
     };
 
     @Override
@@ -97,16 +102,20 @@ public class MainActivity extends Activity  {
                     new String[]{OdometerService.PERMISSION_STRING},
                     PERMISSION_REQUEST_CODE);
         } else {
-            Intent intent = new Intent(this, OdometerService.class);
-            bindService(intent, connection, Context.BIND_AUTO_CREATE);
+            Intent service = new Intent(this, OdometerService.class);
+            bindService(service, connection, Context.BIND_AUTO_CREATE);
         }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        unbindService(); //unbinds service when the onStop method is used
+    }
+
+    private void unbindService() {
         if (bound) {
-            unbindService(connection);
+            unbindService(connection); //if stopped unbind service
             bound = false;
         }
     }
@@ -117,7 +126,7 @@ public class MainActivity extends Activity  {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                double distance = 0.0;
+                double distance = 0.0; //double means a double precision number
                 if (bound && odometer != null) {
                     distance = odometer.getDistance();
                 }
@@ -129,10 +138,21 @@ public class MainActivity extends Activity  {
         });
     }
 
-    stop_button.setOnClickListener(new View OnClickListener() {
-    @Override
-            public void onClick(View v)
+    public void stopService(View view) {
+        unbindService();//method is located under the OnStop method
+        Toast.makeText(this, "service stop", Toast.LENGTH_LONG).show();
     }
+
+    public void onClickReset(View view) {
+       TextView distanceView = findViewById(R.id.distance);
+       distanceView.setText(0, distance); //this is where I added the code to reset the odometer app.
+    }  //I was thinking about calling the id of distance since it is under the class TextView that shows the mileage
+       //however I am having a hard time assigning the variable distance to zero when you press the reset button
+
+    // public void stopService(View view) {
+  //  stopService(new Intent(getBaseContext(), OdometerService.class));
+  //      Toast.makeText(this, "service stop", Toast.LENGTH_LONG).show();
+ //   }
 }
 
 

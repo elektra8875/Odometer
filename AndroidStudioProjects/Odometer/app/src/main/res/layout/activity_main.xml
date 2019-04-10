@@ -1,53 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="com.example.cindylou.odometer.MainActivity"
+    android:orientation="vertical"
+    android:padding="16dp"
+    >
 
     <TextView
         android:id="@+id/distance"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="48sp"
+        android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="60sp" />
-
-  <!--  <Button
-        android:id="@+id/start_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="130dp"
-        android:onClick="onClickStart"
-        android:text="@string/START" /> -->
+        />
 
     <Button
-        android:id="@+id/stop_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="259dp"
-        android:onClick="onClickStop"
+      android:id="@+id/stop_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+        android:layout_marginBottom="400dp"
+        android:onClick="stopService"
         android:text="@string/STOP" />
+     <!-- android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" -->
 
     <Button
-        android:id="@+id/reset_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+      android:id="@+id/reset_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+        android:layout_below="@+id/stop_button"
+      android:layout_marginStart="3dp"
+      android:layout_marginBottom="200dp"
+      android:onClick="onClickReset"
+      android:text="@string/RESET"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginBottom="200dp"
-        android:onClick="onClickReset"
-        android:text="@string/RESET" />
+        android:layout_centerHorizontal="true"/>
 
 
 </RelativeLayout>
+
+
+
+
+
+    <!--  <Button
+          android:id="@+id/start_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentTop="true"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="130dp"
+          android:onClick="onClickStart"
+          android:text="@string/START" /> -->
+
+
+
+
+
+
 
   <!--  android:layout_alignStart="@+id/start_button" include in reset_button once You add start button -->

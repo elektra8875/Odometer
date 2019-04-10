@@ -12,6 +12,8 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.widget.Toast;
 
 public class OdometerService extends Service {
 
@@ -73,6 +75,7 @@ public class OdometerService extends Service {
     @Override
     public void onDestroy() {  //service is no longer being used & is about to be destroyed
         super.onDestroy();
+        System.out.println("message: service stopped");
         if (locManager != null && listener != null) {
             if (ContextCompat.checkSelfPermission(this, PERMISSION_STRING)
                     == PackageManager.PERMISSION_GRANTED) {
