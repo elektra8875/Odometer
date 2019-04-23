@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
     private boolean bound = false;
     private final int PERMISSION_REQUEST_CODE = 698;
     private final int NOTIFICATION_ID = 423;
-    public int distance;
+    //public int stop_button;
 
 
 
@@ -144,8 +144,12 @@ public class MainActivity extends Activity {
     }
 
     public void onClickReset(View view) {
-       TextView distanceView = findViewById(R.id.distance);
-       distanceView.setText(0, distance); //this is where I added the code to reset the odometer app.
+       //TextView stop_button = findViewById(R.id.stop_button);
+        TextView distanceView = findViewById(R.id.distance);
+        distanceView.setText("0");
+
+
+       //this is where I added the code to reset the odometer app.
     }  //I was thinking about calling the id of distance since it is under the class TextView that shows the mileage
        //however I am having a hard time assigning the variable distance to zero when you press the reset button
 
